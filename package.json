@@ -1,0 +1,31 @@
+{
+  "name": "learningreact",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/vidushisharma411/LearingReact#readme",
+  "bugs": {
+    "url": "https://github.com/vidushisharma411/LearingReact/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vidushisharma411/LearingReact.git"
+  },
+  "license": "ISC",
+  "author": "vidushi sharma",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.0"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router": "^6.30.2",
+    "react-router-dom": "^6.30.2"
+  },
+  "keywords": [],
+  "type": "module"
+}
