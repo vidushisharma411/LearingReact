@@ -6,6 +6,8 @@ import resData from "../utils/mockResData";
 const ResMenu = () => {
   const [resInfo, setresInfo] = useState(resData);
 
+  const [handleClick, setHandleClick] = useState(null)
+
   if (!resInfo) return <Shimmer />;
 
   // const{name, cuisine} = {resInfo?.data?.cards[2]?.card?.card?.info?.name}
@@ -42,11 +44,16 @@ const ResMenu = () => {
           <h3 className="my-4 font-bold">⏳ {time}</h3>
         </div>
       </div>
-      {categories.map((cat) => {
+      {categories.map((cat, index) => {
         return (
           <RestaurantCategory
             key={cat.card.card.categoryId}
             data={cat?.card?.card}
+            handleClick={index == handleClick ? true : false}
+            setHandleClick= {() => setHandleClick(index)}
+
+
+
           />
         );
       })}

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import ItemList from "./ItemList";
 
-const RestaurantCategory = (data) => {
-  const [handleClick, setHandleClick] = useState(false);
+const RestaurantCategory = ({data, handleClick, setHandleClick}) => {
+  // const [handleClick, setHandleClick] = useState(false);
   
   const recomandedList = () => {
-    setHandleClick(!handleClick);
+    setHandleClick();
   };
 
   // console.log(data);
@@ -17,11 +17,11 @@ const RestaurantCategory = (data) => {
           onClick={recomandedList}
         >
           <span>
-            {data.data.title} ({data.data.itemCards.length})
+            {data.title} ({data.itemCards.length})
           </span>
           <span>{handleClick ? "⬆️" : "⬇️"}</span>
         </div>
-        {handleClick && <ItemList items={data.data.itemCards} />}
+        {handleClick && <ItemList items={data.itemCards} />}
       </div>
     </div>
   );

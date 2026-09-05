@@ -1,8 +1,7 @@
 const Cart = () =>{
     return(
         <div>
-            <h2>Cart</h2>
-            <h3>food vgera</h3>
+            <h2>This Page is yet to be built</h2>
         </div>
     );
 };
