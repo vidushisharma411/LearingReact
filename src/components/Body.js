@@ -18,18 +18,81 @@ const Body = () => {
     fetchData();
   }, []);
 
+  // const fetchData = async () => {
+  //   // const data = await fetch(
+  //   //   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.9711023&lng=77.6544715&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+  //   // );
+  //   const data = await fetch("/.netlify/functions/restaurants");
+  //   const json = await data.json();
+  //   console.log(json);
+  //   const restaurants =
+  //     json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+  //       ?.restaurants;
+  //   setListofReataurants(restaurants);
+  //   setoriginalList(restaurants);
+  // };
+
+//   const fetchData = async () => {
+//   try {
+//     const response = await fetch("/.netlify/functions/restaurants");
+
+//     const json = await response.json();
+
+//     console.log(json);
+
+//     if (!response.ok) {
+//       console.error("API Error:", json);
+//       return;
+//     }
+
+//     const restaurants =
+//       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+//         ?.restaurants || [];
+
+//     setListofRestaurants(restaurants);
+//     setoriginalList(restaurants);
+//   } catch (error) {
+//     console.error("Failed to fetch restaurants:", error);
+//   }
+// };
   const fetchData = async () => {
-    // const data = await fetch(
-    //   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.9711023&lng=77.6544715&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    // );
-    const data = await fetch("/.netlify/functions/restaurants");
-    const json = await data.json();
-    console.log(json);
-    const restaurants =
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants;
-    setListofReataurants(restaurants);
-    setoriginalList(restaurants);
+    try {
+      const response = await fetch("/.netlify/functions/restaurants");
+
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      console.log("API response:", data);
+
+      // Find restaurants safely from Swiggy's response
+      // const cards = data?.data?.cards || [];
+
+      let restaurants = data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+
+      // for (const card of cards) {
+      //   const restaurantList =
+      //     card?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+
+      //   if (Array.isArray(restaurantList)) {
+      //     restaurants = restaurantList;
+      //     break;
+      //   }
+      // }
+
+      console.log("Restaurants found:", restaurants.length);
+
+      if (!restaurants.length) {
+        throw new Error("No restaurants found in API response");
+      }
+
+      setListofReataurants(restaurants);
+      setoriginalList(restaurants);
+    } catch (error) {
+      console.error("Failed to fetch restaurants:", error);
+    }
   };
 
   const onlineStatus = useOnlineStatus();
